@@ -1,0 +1,6 @@
+@RoastingServer_HostAddress = http://localhost:5043
+
+GET {{RoastingServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
