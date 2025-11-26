@@ -26,9 +26,9 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build . --file Dockerfile --tag ghcr.io/ogden-marrow/RoastingServer:latest
-        docker build . --file Dockerfile --tag ghcr.io/ogden-marrow/RoastingServer:${{ github.sha }}
+        docker build . --file Dockerfile --tag ghcr.io/ogden-marrow/roastingserver:latest
+        docker build . --file Dockerfile --tag ghcr.io/ogden-marrow/roastingserver:${{ github.sha }}
         if [ "${{ github.event_name }}" = "push" ]; then
-          docker push ghcr.io/ogden-marrow/RoastingServer:latest
-          docker push ghcr.io/ogden-marrow/RoastingServer:${{ github.sha }}
+          docker push ghcr.io/ogden-marrow/roastingserver:latest
+          docker push ghcr.io/ogden-marrow/roastingserver:${{ github.sha }}
         fi
