@@ -46,6 +46,7 @@ jobs:
           - linux-x64
           - linux-arm
           - linux-arm64
+          - linux-armel
     
     steps:
     - name: Checkout code
@@ -127,26 +128,66 @@ jobs:
         Download the appropriate version for your platform:
         
         **Linux:**
-        - \`RoastingServer-linux-x64.tar.gz\` (x86_64)
-        - \`RoastingServer-linux-arm.tar.gz\` (ARM32 - Raspberry Pi Zero W, Pi 1, etc.)
-        - \`RoastingServer-linux-arm64.tar.gz\` (ARM64 - Raspberry Pi 3/4/5)
+        - \`RoastingServer-linux-x64.tar.gz\` - x86_64 (Standard Linux PCs, servers)
+        - \`RoastingServer-linux-arm.tar.gz\` - ARMv7 32-bit (Raspberry Pi 2/3/4 32-bit OS)
+        - \`RoastingServer-linux-arm64.tar.gz\` - ARMv8 64-bit (Raspberry Pi 3/4/5 64-bit OS)
+        - \`RoastingServer-linux-armel.tar.gz\` - ARMv6 (Raspberry Pi Zero W, Pi 1)
         
         ### Quick Start
         
-        1. Extract the archive:
+        1. Download the appropriate archive for your system
+        
+        2. Extract the archive:
            \`\`\`bash
            tar -xzf RoastingServer-linux-*.tar.gz
            \`\`\`
         
-        2. Make executable and run:
+        3. Make executable and run:
            \`\`\`bash
            chmod +x RoastingServer
            ./RoastingServer
            \`\`\`
         
-        3. Access the API at:
+        4. Access the server:
+           - Web Interface: http://localhost:5043
            - Swagger UI: http://localhost:5043/swagger
            - Weather endpoint: http://localhost:5043/weatherforecast
+        
+        ### Running as a Service (Optional)
+        
+        To run RoastingServer as a systemd service:
+        
+        \`\`\`bash
+        sudo nano /etc/systemd/system/roasting-server.service
+        \`\`\`
+        
+        Add the following (adjust paths as needed):
+        
+        \`\`\`ini
+        [Unit]
+        Description=Roasting Server
+        After=network.target
+        
+        [Service]
+        Type=simple
+        User=deploy
+        WorkingDirectory=/home/deploy/RoastingServer
+        ExecStart=/home/deploy/RoastingServer/RoastingServer
+        Restart=on-failure
+        RestartSec=10
+        
+        [Install]
+        WantedBy=multi-user.target
+        \`\`\`
+        
+        Then enable and start:
+        
+        \`\`\`bash
+        sudo systemctl daemon-reload
+        sudo systemctl enable roasting-server
+        sudo systemctl start roasting-server
+        sudo systemctl status roasting-server
+        \`\`\`
         
         For detailed documentation, see the [README](https://github.com/${{ github.repository }}/blob/master/README.md).
         EOF

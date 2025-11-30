@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>9a576761-1484-4e5a-a315-53dfbf128007</UserSecretsId>
-		<RuntimeIdentifiers>linux-x64;linux-arm</RuntimeIdentifiers>
+		<RuntimeIdentifiers>linux-x64;linux-arm;linux-arm64;linux-armel</RuntimeIdentifiers>
 	</PropertyGroup>
 
 	<ItemGroup>
