@@ -1,4 +1,4 @@
-﻿// RoastingServer.cpp : Defines the entry point for the application.
+// RoastingServer.cpp : Defines the entry point for the application.
 //
 
 #include "RoastingServer.h"
